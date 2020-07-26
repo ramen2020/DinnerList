@@ -1,0 +1,53 @@
+version: '3'
+services:
+  client:
+    build:
+      context: ./client
+    container_name: dinnerList_client
+    ports:
+      - 8080:8080
+    volumes:
+      - ./client:/app
+    working_dir: /app
+    tty: true
+    # command: sh -c "yarn serve"
+
+  api:
+    build:
+      context: ./api
+    container_name: dinnerList_api
+    ports:
+      - 8010:8010
+    volumes:
+      - ./api:/go/src/app
+    working_dir: /go/src/app
+    tty: true
+    # command: fresh
+
+  nginx:
+    image: nginx
+    depends_on:
+      - api
+    container_name: dinnerList-nginx
+    ports:
+    - 80:80
+    environment:
+    - TZ=Asia/Tokyo
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  # mysql
+  db:
+    build: ./mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: dinnerList
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
