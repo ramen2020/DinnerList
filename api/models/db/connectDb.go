@@ -21,7 +21,7 @@ func ConnectDb() *gorm.DB {
 		panic("データベースへの接続に失敗しました")
 	}
 	db.LogMode(true)
-	db.AutoMigrate(&entity.Tweet{})
+	db.AutoMigrate(&entity.Dinner{})
 	db.AutoMigrate(&entity.User{})
 	fmt.Println("db connected: ", &db)
 
