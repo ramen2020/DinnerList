@@ -24,11 +24,15 @@ export default {
   },
   methods: {
     async getDeleteById() {
-      await this.$axios.post(`/api/dinner/delete/${this.id}`)
-            this.$router.replace({path: '/'})
+      await this.$axios.post(`/api/dinner/delete/${this.id}`,
+        { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
+      })
+      this.$router.replace({path: '/'})
     },
     async getDinnerById() {
-      const response = await this.$axios.get(`/api/dinner/${this.id}`)
+      const response = await this.$axios.get(`/api/dinner/${this.id}`,
+        { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
+      })
       console.log(response.data)
       this.dinner = response.data
     },

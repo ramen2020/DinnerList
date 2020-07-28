@@ -66,7 +66,8 @@ export default {
   },
   methods: {
     async getAllDinners () {
-      const response = await this.$axios.get(`/api/dinner`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
+      const response = await this.$axios.get(`/api/dinner`,
+        { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
       })
         .catch(err => err.response || err)
         console.log(response)
@@ -77,7 +78,8 @@ export default {
       params.append('text', this.dinnerText)
       params.append('category_id', this.dinnerCategory_id)
 
-      const response = await this.$axios.post(`/api/dinner/create`, params, { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }})
+      const response = await this.$axios.post(`/api/dinner/create`, params,
+        { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }})
         .catch(err => err.response || err)
 
         if (response.status === 400) {

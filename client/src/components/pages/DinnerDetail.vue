@@ -30,7 +30,9 @@ export default {
   },
   methods: {
     async getDinnerById() {
-      const response = await this.$axios.get(`/api/dinner/${this.id}`)
+      const response = await this.$axios.get(`/api/dinner/${this.id}`,
+        { headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
+      })
       console.log(response.data)
       this.dinner = response.data
     },
