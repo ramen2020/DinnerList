@@ -1,3 +1,7 @@
+## introduction
+This is a SPA application created using go and vue.js
+I used firebass for authentication
+
 ## version
 |nginx|go|vue|npm|MySQL|
 |:--:|:--:|:--:|:--:|:--:|
